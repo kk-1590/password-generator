@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 
 function App() {
   const [length, setLength] = useState(8);
@@ -17,11 +17,17 @@ function App() {
       str += "!@#$%^&*[]+=-_~`";
     }
 
-    for (let i = 1; i <= array.length; i++) {
+    for (let i = 1; i <= length; i++) {
       let char = Math.floor(Math.random() * str.length + 1);
       generatedPass += str.charAt(char);
     }
+
+    setPassword(generatedPass);
   }, [length, numberAllowed, characterAllowed, setPassword]);
+
+  useEffect(() => {
+    passwrdGenerator();
+  }, [length, numberAllowed, characterAllowed, passwrdGenerator]);
 
   return (
     <>
